@@ -1,55 +1,122 @@
 <script>
-import HelloWorld from "./components/HelloWorld";
+import NavDrawers from "./components/NavDrawers.vue";
+import NavTab from "./components/Tab.vue";
 
 export default {
-    name: "App",
     components: {
-        HelloWorld
+        NavDrawers,
+        NavTab,
     },
-
     data: () => ({
-        //
-    })
+        drawer: null,
+        tabList: [
+            {
+                label: "price",
+                icon: "chart-bar",
+            }, {
+                label: "estimation",
+                icon: "chart-line",
+            }, {
+                label: "ranking",
+                icon: "format-list-numbered",
+            }, {
+                label: "optional",
+                icon: "clipboard-plus-outline",
+            }, {
+                label: "fundBar",
+                icon: "comment-text-outline",
+            }, {
+                label: "account",
+                icon: "account-check-outline",
+            }, {
+                label: "trade",
+                icon: "currency-cny",
+            }, {
+                label: "buy",
+                icon: "cart-outline",
+            }, {
+                label: "currentPo",
+                icon: "home-currency-usd",
+            }, {
+                label: "vip",
+                icon: "credit-card-outline",
+            },
+        ],
+    }),
+    created() {
+        this.$vuetify.theme.light = true;
+    },
 };
 </script>
 
 <template>
-    <v-app>
-        <v-app-bar app color="primary" dark>
-            <div class="d-flex align-center">
-                <v-img
-                    alt="Vuetify Logo"
-                    class="shrink mr-2"
-                    contain
-                    src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-                    transition="scale-transition"
-                    width="40"
-                />
+    <v-app id="found-fund">
+        <v-navigation-drawer
+            v-model="drawer"
+            app
+            clipped
+        >
+            <nav-drawers />
+        </v-navigation-drawer>
 
-                <v-img
-                    alt="Vuetify Name"
-                    class="shrink mt-1 hidden-sm-and-down"
-                    contain
-                    min-width="100"
-                    src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-                    width="100"
-                />
-            </div>
-
-            <v-spacer></v-spacer>
-
-            <v-btn
-                href="https://github.com/vuetifyjs/vuetify/releases/latest"
-                target="_blank"
-                text
+        <v-app-bar
+            app
+            clipped-left
+            color="red"
+            dense
+        >
+            <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+            <v-icon class="mx-4">
+                fab fa-youtube
+            </v-icon>
+            <v-toolbar-title class="mr-12 align-center">
+                <span class="title font-face">
+                    {{ $t("title") }}
+                </span>
+            </v-toolbar-title>
+            <v-spacer />
+            <v-row
+                align="center"
+                style="max-width: 650px"
             >
-                <span class="mr-2">Latest Release</span>
-                <v-icon>mdi-open-in-new</v-icon>
-            </v-btn>
+                <v-text-field
+                    :append-icon-cb="() => {}"
+                    :placeholder="$t('placeholder.search')"
+                    single-line
+                    append-icon="search"
+                    color="white"
+                    hide-details
+                />
+            </v-row>
         </v-app-bar>
 
         <v-content>
-            <HelloWorld/>
+            <v-container class="main-content fill-height">
+                <div class="mx-auto">
+                    <nav-tab
+                        v-for="(item, index) in tabList"
+                        :key="index"
+                        :icon="item.icon"
+                        :text="item.label"
+                    />
+                </div>
+            </v-container>
         </v-content>
     </v-app>
 </template>
+
+<style lang="scss">
+/*.theme--light.v-sheet {*/
+/*    color: azure;*/
+/*}*/
+
+#found-fund {
+    .font-face {
+        font-family: "Noto Sans SC" !important;
+    }
+    .main-content {
+        align-items: normal;
+    }
+}
+
+</style>
