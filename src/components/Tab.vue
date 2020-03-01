@@ -17,23 +17,33 @@ export default {
 </script>
 
 <template>
-    <div class="card-tab float-left ma-2">
-        <v-card hover>
+    <div class="card-tab float-left">
+        <v-card
+            hover
+            tile
+            outlined
+            :flat="true"
+        >
             <v-icon
                 color="orange"
-                size="70"
+                size="200"
             >
                 {{ iconName }}
             </v-icon>
+            <v-card-text class="font-face display-1 text-center pa-0">
+                {{ displayText }}
+            </v-card-text>
         </v-card>
-        <v-sheet class="font-face text-center pa-0">
-            {{ displayText }}
-        </v-sheet>
     </div>
 </template>
 
 <style lang="scss" scoped>
+    @import '~vuetify/src/styles/main.sass';
+
     .card-tab {
         align-items: center;
+        .v-card {
+            border-color: rgba(255, 193, 7);
+        }
     }
 </style>
