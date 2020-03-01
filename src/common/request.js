@@ -1,29 +1,38 @@
-import { isEmpty } from "lodash";
+import { isEmpty, forIn } from "lodash";
 
-const baseUrl = "/fundapi";
+const baseResource = "/fundApi";
 
 const requestSettings = {
     search_fund_detail: {
-        url: "/pingzhongdata/[fundId].js",
+        url: "/pingzhongdata/[symbol].js",
         method: "GET",
     },
     get_all_funds: {
         url: "/js/fundcode_search.js",
         method: "GET",
     },
+    get_market_value: {
+        url: "?page=[page]&pagesize=[pageSize]&type=[type]&key=6cd8df35cc89cf8bf6bfcc5cf197d3d4",
+        method: "GET",
+    },
 };
 
-function getRequestInfo(requestName, params) {
-    const requestInfo = requestSettings[requestName];
+function getRequestInfo(requestName, params, baseUrl) {
+    const requestInfo = { ...requestSettings[requestName] };
     let { url } = requestInfo;
 
     if (!isEmpty(params)) {
-        Object.keys(params).forEach((key) => {
-            url = url.replace(`[${key}]`, params.key);
+        forIn(params, (value, key) => {
+            url = url.replace(`[${key}]`, value);
         });
     }
 
-    requestInfo.url = baseUrl + url;
+    if (baseUrl) {
+        requestInfo.url = baseUrl + url;
+    } else {
+        requestInfo.url = baseResource + url;
+    }
+
     return requestInfo;
 }
 

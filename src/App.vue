@@ -1,27 +1,25 @@
 <script>
 import NavDrawers from "./components/NavDrawers.vue";
 import NavTab from "./components/Tab.vue";
+import FundTable from "./components/FundTable.vue";
 
 export default {
     components: {
         NavDrawers,
         NavTab,
+        FundTable,
     },
     data: () => ({
+        funds: [],
         drawer: null,
         tabList: [
+            // {
+            //     label: "price",
+            //     icon: "chart-bar",
+            // },
             {
                 label: "price",
-                icon: "chart-bar",
-            }, {
-                label: "estimation",
                 icon: "chart-line",
-            }, {
-                label: "ranking",
-                icon: "format-list-numbered",
-            }, {
-                label: "optional",
-                icon: "clipboard-plus-outline",
             }, {
                 label: "fundBar",
                 icon: "comment-text-outline",
@@ -29,18 +27,25 @@ export default {
                 label: "account",
                 icon: "account-check-outline",
             }, {
-                label: "trade",
-                icon: "currency-cny",
+                label: "ranking",
+                icon: "format-list-numbered",
             }, {
-                label: "buy",
-                icon: "cart-outline",
-            }, {
-                label: "currentPo",
-                icon: "home-currency-usd",
-            }, {
-                label: "vip",
-                icon: "credit-card-outline",
+                label: "optional",
+                icon: "clipboard-plus-outline",
             },
+            // {
+            //     label: "trade",
+            //     icon: "currency-cny",
+            // }, {
+            //     label: "buy",
+            //     icon: "cart-outline",
+            // }, {
+            //     label: "currentPo",
+            //     icon: "home-currency-usd",
+            // }, {
+            //     label: "vip",
+            //     icon: "credit-card-outline",
+            // },
         ],
     }),
     created() {
@@ -66,9 +71,9 @@ export default {
             dense
         >
             <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-            <v-icon class="mx-4">
-                fab fa-youtube
-            </v-icon>
+            <!--            <v-icon class="mx-4">-->
+            <!--                mdi-chart-timeline-variant-->
+            <!--            </v-icon>-->
             <v-toolbar-title class="mr-12 align-center">
                 <span class="title font-face">
                     {{ $t("title") }}
@@ -93,15 +98,16 @@ export default {
 
         <v-content>
             <v-img src="./assets/images/home.jpg" />
+            <div>
+                <nav-tab
+                    v-for="(item, index) in tabList"
+                    :key="index"
+                    :icon="item.icon"
+                    :text="item.label"
+                />
+            </div>
             <v-container class="main-content fill-height">
-                <div class="mx-auto">
-                    <nav-tab
-                        v-for="(item, index) in tabList"
-                        :key="index"
-                        :icon="item.icon"
-                        :text="item.label"
-                    />
-                </div>
+                <fund-table />
             </v-container>
         </v-content>
     </v-app>

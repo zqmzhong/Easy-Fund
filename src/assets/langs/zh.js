@@ -1,5 +1,5 @@
 export default {
-    title: "天天基金",
+    title: "发现基金",
     labels: {
         price: "基金净值",
         estimation: "净值估算",
@@ -35,8 +35,23 @@ export default {
         education: "投教基地",
         advice: "意见反馈",
         safe: "安全保障",
+        headers: {
+            index: "序号",
+            symbol: "基金代码",
+            shortName: "简称",
+            perPrice: "单位净值",
+            totalPrice: "累计净值",
+            return: "日增长值",
+            returnRate: "日增长率",
+            status: "申购状态",
+            fee: "手续费",
+            operate: "操作",
+        },
     },
     placeholder: {
         search: "搜索...",
+    },
+    action: {
+        collect: "收藏",
     },
 };
