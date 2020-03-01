@@ -62,7 +62,7 @@ export default {
         <v-app-bar
             app
             clipped-left
-            color="red"
+            color="amber"
             dense
         >
             <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
@@ -80,10 +80,11 @@ export default {
                 style="max-width: 650px"
             >
                 <v-text-field
+                    class="font-face"
                     :append-icon-cb="() => {}"
                     :placeholder="$t('placeholder.search')"
                     single-line
-                    append-icon="search"
+                    append-icon="mdi-magnify"
                     color="white"
                     hide-details
                 />
@@ -91,6 +92,7 @@ export default {
         </v-app-bar>
 
         <v-content>
+            <v-img src="./assets/images/home.jpg" />
             <v-container class="main-content fill-height">
                 <div class="mx-auto">
                     <nav-tab

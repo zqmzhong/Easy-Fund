@@ -1,7 +1,6 @@
 import Vue from "vue";
 import VueI18n from "vue-i18n";
 import vuetify from "./plugins/vuetify";
-import "material-design-icons-iconfont/dist/material-design-icons.css";
 import App from "./App.vue";
 import en from "./assets/langs/en";
 import zh from "./assets/langs/zh";
